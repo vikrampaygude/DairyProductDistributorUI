@@ -1,0 +1,37 @@
+<div class="row align-items-center">  
+  <div class="col col-md-4">
+    <h2>Sphopkeepers</h2>
+  </div>
+  <div class="col col-md-4  ">
+    <h2 class="pull-right">
+      <a class="btn btn-info" routerLink="/sphopkeeper/new" role="button">New Sphopkeeper</a>
+    </h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-sm table-bordered ">
+      <thead>
+        <tr>
+          <th scope="col">#Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col"> Area Name</th>
+          <th scope="col"> Distributor Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let sphopkeeper of sphopkeepers">
+          <td scope="col"  >{{sphopkeeper.id}}</th>
+          <td scope="col">{{sphopkeeper.name}}</td>
+          <td scope="col">{{sphopkeeper.address}}</td>
+          <td scope="col">{{sphopkeeper.distributorAreaName}}</td>
+          <td scope="col">{{sphopkeeper.distributorName}}</td>
+          <td scope="col">
+            <a class="btn btn-sm btn-primary" routerLink="/sphopkeeper/edit/{{sphopkeeper.id}}" role="button">edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

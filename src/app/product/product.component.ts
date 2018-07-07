@@ -11,9 +11,10 @@ export class ProductComponent implements OnInit {
   
   products : Product[];
 
-  model = new Product(0,null,null,null,0,0);
+  model = new Product(0,null,null,null,null,0,0,null);
 
   submitted = false;
+
 
   onSubmit() { 
     this.submitted = true;
@@ -28,7 +29,7 @@ export class ProductComponent implements OnInit {
   }
 
   newProduct(){
-    this.model = new Product(0,null,null,null,0,0);
+    this.model = new Product(0,null,null,null,null,0,0,null);
   }
 
   ngOnInit() {

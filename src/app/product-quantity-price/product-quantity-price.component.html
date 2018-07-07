@@ -1,0 +1,41 @@
+<div class="row align-items-center">  
+  <div class="col col-md-4">
+    <h2>Quantity Prices </h2>
+    <h4>{{product.name}} (<small>{{product.brandName}}</small>)</h4>
+      
+    
+  </div>
+  <div class="col col-md-4  ">
+    <h2 class="pull-right">
+      <a class="btn btn-info" routerLink="/product/{{product.id}}/quantity-price/new" role="button">New Product Quantity Price</a>
+    </h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-sm table-bordered ">
+      <thead>
+        <tr>
+          <th scope="col">#Id</th>
+          <th scope="col">Quanity</th>
+          <th scope="col">Selling price</th>
+          <th scope="col">Purchase price</th>
+          <th scope="col">Product id</th>
+          <th scope="col">Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productQuantityPrice of productQuantityPrices">
+          <td scope="row" >{{productQuantityPrice.id}}</td>
+          <td>{{productQuantityPrice.quantity}} </td>
+          <td>{{productQuantityPrice.sellingPrice}}</td>
+          <td>{{productQuantityPrice.purchasePrice}}</td>
+          <td>{{productQuantityPrice.productId}}</td>
+          <td>
+            <a class="btn btn-sm btn-primary" routerLink="/product/{{product.id}}/quantity-price/edit/{{productQuantityPrice.id}}" role="button">edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product';
+import { Shopkeeper } from './shopkeeper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json','Access-Control-Allow-Origin':'*' })
@@ -12,22 +10,22 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class ShopkeeperService {
 
-  public url = 'http://localhost:8080/api/product';
+  public url = 'http://localhost:8080/api/shopkeeper';
 
   constructor(  private http: HttpClient) { }
 
-  getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.url+"/list");
+  getAllShopkeepers(): Observable<Shopkeeper[]> {
+    return this.http.get<Shopkeeper[]>(this.url+"/list");
   }
 
-  getById(id: number): Observable<Product>{
-    return this.http.get<Product>(this.url+"/"+id);
+  getById(id: number): Observable<Shopkeeper>{
+    return this.http.get<Shopkeeper>(this.url+"/"+id);
    
   }
   
-  save(product: Product) {
+  save(product: Shopkeeper) {
     if(product.id && product.id > 0)
     return this.update(product);
 
@@ -35,7 +33,7 @@ export class ProductService {
     return this.http.post(this.url, copy);
   }
 
-  update(product: Product) {
+  update(product: Shopkeeper) {
     const copy = this.convert(product);
     return this.http.put(this.url, copy);
   }
@@ -43,16 +41,16 @@ export class ProductService {
       /**
      * Convert a returned JSON object to Campaign.
      */
-    private convertItemFromServer(json: any): Product {
-      const entity: Product = Object.assign(new Product(0,null,null,null,0,0,null), json);
+    private convertItemFromServer(json: any): Shopkeeper {
+      const entity: Shopkeeper = Object.assign(new Shopkeeper(0,null,null,null,null,null,0), json);
       return entity;
     }
 
       /**
      * Convert a Campaign to a JSON which can be sent to the server.
      */
-    private convert(product: Product): Product {
-      const copy: Product = Object.assign({}, product);
+    private convert(product: Shopkeeper): Shopkeeper {
+      const copy: Shopkeeper = Object.assign({}, product);
       return copy;
   }
   

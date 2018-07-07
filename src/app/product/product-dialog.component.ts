@@ -13,8 +13,9 @@ import { ProductBrandService } from '../product-brand/product-brand.service';
 export class ProductDialogComponent implements OnInit {
   productBrands : ProductBrand[];
 
-  model = new Product(0,null,null,null,0,0);
-  
+  model = new Product(0,null,null,null,null,0,0,null);
+
+
 
   submitted = false;
 

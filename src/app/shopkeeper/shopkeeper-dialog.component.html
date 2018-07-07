@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col col-md-4">
-    <h2>New Product</h2>
-    <form (ngSubmit)="onSubmit()" #productForm="ngForm">
-      <!-- Product Name -->
+    <h2>New Shopkeeper</h2>
+    <form (ngSubmit)="onSubmit()" #phopkeeperForm="ngForm">
+      <!-- Shopkeeper Name -->
       <div class="form-group">
         <label for="name">Name</label>
         <input required type="text" [(ngModel)]="model.name" name="name" #name="ngModel" class="form-control" id="name" placeholder="Enter Name">        
@@ -15,7 +15,7 @@
       <div class="form-group">
           <label for="name">Name</label>
           <select [(ngModel)]="model.brandId" name="brandId" #distributorId="ngModel" class="form-control" id="brandId">
-              <option *ngFor="let productBrand of productBrands" [ngValue]="productBrand.id">{{productBrand.name}}</option>
+              <option *ngFor="let phopkeeperBrand of phopkeeperBrands" [ngValue]="phopkeeperBrand.id">{{phopkeeperBrand.name}}</option>
           </select>
       </div>
         <!-- Selling Price-->
@@ -49,7 +49,7 @@
 
 
       <button type="submit" class="btn btn-primary"
-      [disabled]="!productForm.form.valid">save</button>
+      [disabled]="!phopkeeperForm.form.valid">save</button>
     </form>
   </div>
 </div>

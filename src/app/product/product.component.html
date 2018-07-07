@@ -16,6 +16,9 @@
           <th scope="col">#Id</th>
           <th scope="col">Name</th>
           <th scope="col">Product brand</th>
+          <th> 1 Unit (liter,kg)  price </th>
+          <th scope="col">Unit of measure</th>
+          <th scope="col">Quantiry : Price</th>
           <th scope="col">Operation</th>
         </tr>
       </thead>
@@ -23,9 +26,21 @@
         <tr *ngFor="let product of products">
           <th scope="row" >{{product.id}}</th>
           <td>{{product.name}}</td>
-          <td>{{product.productBrandName}}</td>
+          <td>{{product.brandName}}</td>
+          <td>
+            selling price: {{product.sellingPrice}}
+            <br/>
+            purchase price : {{product.purchasePrice}}
+          </td>
+          <td>{{product.unitOfMeasure}}</td>
+          <td>
+            <span *ngFor="let productQuantityPrice of product.productQuantityPriceDTOList">
+                Quantity: {{productQuantityPrice.quantity }} {{product.unitOfMeasure}} price: {{productQuantityPrice.sellingPrice}} , 
+            </span>
+          </td>
           <td>
             <a class="btn btn-sm btn-primary" routerLink="/product/edit/{{product.id}}" role="button">edit</a>
+            <a class="btn btn-sm btn-primary" routerLink="/product/{{product.id}}/quantity-price" role="button">view prices</a>
           </td>
         </tr>
       </tbody>

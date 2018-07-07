@@ -13,16 +13,35 @@ import { DistributorAreaComponent } from './distributor-area/distributor-area.co
 import { DistributorAreaDialogComponent } from './distributor-area/distributor-area-dialog.component';
 import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { ProductBrandDialogComponent } from './product-brand/product-brand-dialog.component';
+import { ProductComponent } from './product/product.component';
+import { ProductDialogComponent } from './product/product-dialog.component';
+import { ProductQuantityPriceDialogComponent } from './product-quantity-price/product-quantity-price-dialog.component';
+import { ProductQuanityPriceComponent } from './product-quantity-price/product-quantity-price.component';
+import { ShopkeeperComponent } from './shopkeeper/shopkeeper.component';
+import { ShopkeeperDialogComponent } from './shopkeeper/shopkeeper-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    //distributor
     DistributorComponent,
     DistributorDialogComponent,
+    //distributor-area
     DistributorAreaComponent,
     DistributorAreaDialogComponent,
+    //product-brand
     ProductBrandComponent,
-    ProductBrandDialogComponent
+    ProductBrandDialogComponent,
+    //product
+    ProductComponent,
+    ProductDialogComponent,
+    //product-quantity-price
+    ProductQuanityPriceComponent,
+    ProductQuantityPriceDialogComponent,
+    //Shopkeeper
+    ShopkeeperComponent,
+    ShopkeeperDialogComponent,
+
   ],
   imports: [
     BrowserModule,
