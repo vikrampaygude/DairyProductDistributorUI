@@ -44,7 +44,7 @@ export class ProductService {
      * Convert a returned JSON object to Campaign.
      */
     private convertItemFromServer(json: any): Product {
-      const entity: Product = Object.assign(new Product(0,null,null,null,0,0,null), json);
+      const entity: Product = Object.assign(Product.getEmptyObject(), json);
       return entity;
     }
 

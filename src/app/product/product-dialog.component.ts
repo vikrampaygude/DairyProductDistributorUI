@@ -4,6 +4,8 @@ import {ProductService} from './product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductBrand } from '../product-brand/product-brand';
 import { ProductBrandService } from '../product-brand/product-brand.service';
+import { DistributorArea } from '../distributor-area/distributor-area';
+import { DistributorAreaService } from '../distributor-area/distributor-area.service';
 
 @Component({
   selector: 'app-product-dialog',
@@ -12,8 +14,9 @@ import { ProductBrandService } from '../product-brand/product-brand.service';
 })
 export class ProductDialogComponent implements OnInit {
   productBrands : ProductBrand[];
-
-  model = new Product(0,null,null,null,null,0,0,null);
+  model = Product.getEmptyObject();
+  distributorAreaList : DistributorArea[];
+  distributorAreaCheckList = new Array();
 
 
 
@@ -21,16 +24,56 @@ export class ProductDialogComponent implements OnInit {
 
   onSubmit() { 
     this.submitted = true;
-    console.log("onSubmit "+this.model.name);
+    this.model.distributorAreaDTOList = [];
+      
+    this.distributorAreaCheckList.forEach(distributorCheck => {
+      if(distributorCheck.checked)
+        this.distributorAreaCheckList.forEach(area =>{
+            if(distributorCheck.id == area.id)
+              this.model.distributorAreaDTOList.push(area);
+        })
+    })
     this.service.save(this.model).subscribe(val => this.router.navigate(['/products']));
     
   }
 
+  private markCheckedDistributorArea(){
+    this.distributorAreaCheckList.forEach(distAreaCheck =>
+    {
+      this.model.distributorAreaDTOList && this.model.distributorAreaDTOList.forEach(distAreaM => {
+        if((distAreaM.id == distAreaCheck.id)){
+          distAreaCheck.checked = true;
+        }
+        
+      })
+    });
+  }
   constructor(public service : ProductService, public router : Router, private route: ActivatedRoute,
-    public productBrandService : ProductBrandService) { 
-      if(this.route.snapshot.params.id)
-        service.getById(this.route.snapshot.params.id).subscribe(obj => this.model = obj);
-      this.productBrandService.getAllProductBrands().subscribe(productBrands => this.productBrands = productBrands );
+    public productBrandService : ProductBrandService,
+    public areaService: DistributorAreaService) { 
+      if(this.route.snapshot.params.id){
+        service.getById(this.route.snapshot.params.id).subscribe(obj => {
+          this.model = obj;
+          this.populateDistAreaCheckList();
+        });
+      }else{
+        this.populateDistAreaCheckList();
+      }
+
+    this.productBrandService.getAllProductBrands().subscribe(productBrands => this.productBrands = productBrands );
+
+  }
+
+  private  populateDistAreaCheckList(){
+    this.areaService.getAllDistributorAreas().subscribe(
+      areaList=> 
+      { 
+        this.distributorAreaList = areaList;
+        areaList.forEach(distributorArea => {
+          this.distributorAreaCheckList.push({"id" : distributorArea.id,"name": distributorArea.name, checked:false });
+        });
+        this.markCheckedDistributorArea();
+      });
   }
 
   ngOnInit() { }

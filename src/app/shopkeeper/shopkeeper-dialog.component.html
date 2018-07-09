@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col col-md-4">
     <h2>New Shopkeeper</h2>
-    <form (ngSubmit)="onSubmit()" #phopkeeperForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #shopkeeperForm="ngForm">
       <!-- Shopkeeper Name -->
       <div class="form-group">
         <label for="name">Name</label>
@@ -11,45 +11,20 @@
             Name is required
           </div>
       </div>
-      <!-- Brand-->
+        <!-- address-->
       <div class="form-group">
-          <label for="name">Name</label>
-          <select [(ngModel)]="model.brandId" name="brandId" #distributorId="ngModel" class="form-control" id="brandId">
-              <option *ngFor="let phopkeeperBrand of phopkeeperBrands" [ngValue]="phopkeeperBrand.id">{{phopkeeperBrand.name}}</option>
+          <label for="address">Address</label>
+          <input  type="text" [(ngModel)]="model.address" name="address" #address="ngModel" class="form-control" id="address" placeholder="Enter address">        
+      </div>
+      <!-- Distributor Area-->
+      <div class="form-group">
+          <label for="name">Distributor Area</label>
+          <select [(ngModel)]="model.distributorAreaId" name="distributorAreaId" #distributorAreaId="ngModel" class="form-control" id="distributorAreaId">
+              <option *ngFor="let distributorArea of distributorAreas" [ngValue]="distributorArea.id">{{distributorArea.name}}</option>
           </select>
-      </div>
-        <!-- Selling Price-->
-      <div class="form-group">
-          <label for="sellingPrice">Unit of measure</label>
-          <input required type="number" [(ngModel)]="model.unitOfMe" name="sellingPrice" #sellingPrice="ngModel" class="form-control" id="name" placeholder="Enter Selling Price">        
-            <div [hidden]="sellingPrice.valid || sellingPrice.pristine"
-            class="alert alert-danger">
-            Selling price is required
-            </div>
-      </div>
-      <!-- Purchase Price-->
-      <div class="form-group">
-          <label for="purchasePrice">Purchase Price</label>
-          <input required type="text" [(ngModel)]="model.purchasePrice" name="purchasePrice" #purchasePrice="ngModel" class="form-control" id="purchasePrice" placeholder="Enter Purchase Price">        
-            <div [hidden]="purchasePrice.valid || purchasePrice.pristine"
-            class="alert alert-danger">
-            Purchase Price is required
-            </div>
-      </div>
-      <!-- Unit of measure -->
-      <div class="form-group">
-          <label for="unitOfMeasure">Unit of measure</label>
-          <input required type="text" [(ngModel)]="model.unitOfMeasure" name="unitOfMeasure" #unitOfMeasure="ngModel" class="form-control" id="purchasePrice" placeholder="Enter Purchase Price">        
-            <div [hidden]="unitOfMeasure.valid || unitOfMeasure.pristine"
-            class="alert alert-danger">
-            Unit Of Measure Price is required
-            </div>
-      </div>
-      
-
-
+      </div>     
       <button type="submit" class="btn btn-primary"
-      [disabled]="!phopkeeperForm.form.valid">save</button>
+      [disabled]="!shopkeeperForm.form.valid">save</button>
     </form>
   </div>
 </div>

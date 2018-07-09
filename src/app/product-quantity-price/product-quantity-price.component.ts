@@ -37,7 +37,7 @@ export class ProductQuanityPriceComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService) { 
     //console.log(this.route.snapshot.params);
-    this.product = new Product(0,'','','','',0,0,null);
+    this.product = Product.getEmptyObject();
  
     this.service.getProductQuantityPrices(this.route.snapshot.params.productId).subscribe(productQuantityPrices => {this.productQuantityPrices = productQuantityPrices; console.log(this.productQuantityPrices);} );
     this.productService.getById(this.route.snapshot.params.productId).subscribe(product => this.product = product );

@@ -25,7 +25,7 @@ export class ProductQuantityPriceDialogComponent implements OnInit {
     private route: ActivatedRoute,
     public productService: ProductService) { 
 
-    this.product = new Product(0,'','','','',0,0,null);
+    this.product = Product.getEmptyObject();
     // if id is present then its edit 
     if(this.route.snapshot.params.id)
       service.getById(this.route.snapshot.params.id).subscribe(obj => this.model = obj);

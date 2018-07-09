@@ -1,10 +1,10 @@
 <div class="row align-items-center">  
   <div class="col col-md-4">
-    <h2>Sphopkeepers</h2>
+    <h2>shopkeepers</h2>
   </div>
   <div class="col col-md-4  ">
     <h2 class="pull-right">
-      <a class="btn btn-info" routerLink="/sphopkeeper/new" role="button">New Sphopkeeper</a>
+      <a class="btn btn-info" routerLink="/shopkeeper/new" role="button">New shopkeeper</a>
     </h2>
   </div>
 </div>
@@ -18,17 +18,18 @@
           <th scope="col">Address</th>
           <th scope="col"> Area Name</th>
           <th scope="col"> Distributor Name</th>
+          <th scope="col">Options</th>
         </tr>
       </thead>
       <tbody>
-        <tr scope="row" *ngFor="let sphopkeeper of sphopkeepers">
-          <td scope="col"  >{{sphopkeeper.id}}</th>
-          <td scope="col">{{sphopkeeper.name}}</td>
-          <td scope="col">{{sphopkeeper.address}}</td>
-          <td scope="col">{{sphopkeeper.distributorAreaName}}</td>
-          <td scope="col">{{sphopkeeper.distributorName}}</td>
+        <tr scope="row" *ngFor="let shopkeeper of shopkeepers">
+          <td scope="col"  >{{shopkeeper.id}}</td>
+          <td scope="col">{{shopkeeper.name}}</td>
+          <td scope="col">{{shopkeeper.address}}</td>
+          <td scope="col">{{shopkeeper.distributorAreaName}}</td>
+          <td scope="col">{{shopkeeper.distributorName}}</td>
           <td scope="col">
-            <a class="btn btn-sm btn-primary" routerLink="/sphopkeeper/edit/{{sphopkeeper.id}}" role="button">edit</a>
+            <a class="btn btn-sm btn-primary" routerLink="/shopkeeper/edit/{{shopkeeper.id}}" role="button">edit</a>
           </td>
         </tr>
       </tbody>

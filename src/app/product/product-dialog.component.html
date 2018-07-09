@@ -20,8 +20,8 @@
       </div>
         <!-- Selling Price-->
       <div class="form-group">
-          <label for="sellingPrice">Unit of measure</label>
-          <input required type="number" [(ngModel)]="model.unitOfMe" name="sellingPrice" #sellingPrice="ngModel" class="form-control" id="name" placeholder="Enter Selling Price">        
+          <label for="sellingPrice">Selling price</label>
+          <input required type="number" [(ngModel)]="model.sellingPrice" name="sellingPrice" #sellingPrice="ngModel" class="form-control" id="name" placeholder="Enter Selling Price">        
             <div [hidden]="sellingPrice.valid || sellingPrice.pristine"
             class="alert alert-danger">
             Selling price is required
@@ -45,7 +45,17 @@
             Unit Of Measure Price is required
             </div>
       </div>
-      
+      <div class="form-group">
+          <label for="distributorAreaList">Distributor Area List:</label>
+          <div *ngFor="let distributorArea of distributorAreaCheckList">
+              <label>
+                  <input type="checkbox"
+                         name="{{distributorArea.name}}"
+                         [(ngModel)]="distributorArea.checked"/>
+                  {{distributorArea.name}}
+              </label>
+          </div>
+      </div>
 
 
       <button type="submit" class="btn btn-primary"
