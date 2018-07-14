@@ -11,7 +11,7 @@ export class ProductBrandComponent implements OnInit {
   
   productBrands : ProductBrand[];
 
-  model = new ProductBrand(0,null);
+  model = ProductBrand.getEmptyObject();
 
   submitted = false;
 
@@ -28,7 +28,7 @@ export class ProductBrandComponent implements OnInit {
   }
 
   newProductBrand(){
-    this.model = new ProductBrand(0,null);
+    this.model = ProductBrand.getEmptyObject();
   }
 
   ngOnInit() {

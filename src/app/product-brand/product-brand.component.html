@@ -15,6 +15,7 @@
         <tr>
           <th scope="col">#Id</th>
           <th scope="col">Name</th>
+          <th scope="col">Short name</th>
           <th scope="col">Operation</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
         <tr *ngFor="let productBrand of productBrands">
           <th scope="row" >{{productBrand.id}}</th>
           <td>{{productBrand.name}}</td>
+          <td>{{productBrand.shortName}}</td>
           <td>
             <a class="btn btn-sm btn-primary" routerLink="/product-brand/edit/{{productBrand.id}}" role="button">edit</a>
           </td>

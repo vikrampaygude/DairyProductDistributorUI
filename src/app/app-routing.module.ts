@@ -8,10 +8,11 @@ import { ProductBrandComponent } from './product-brand/product-brand.component';
 import { ProductBrandDialogComponent } from './product-brand/product-brand-dialog.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDialogComponent } from './product/product-dialog.component';
-import { ProductQuanityPriceComponent } from './product-quantity-price/product-quantity-price.component';
-import { ProductQuantityPriceDialogComponent } from './product-quantity-price/product-quantity-price-dialog.component';
 import { ShopkeeperComponent } from './shopkeeper/shopkeeper.component';
 import { ShopkeeperDialogComponent } from './shopkeeper/shopkeeper-dialog.component';
+import { OrderComponent } from './order/order.component';
+import { ProductWeightPriceComponent } from './product-weight-price/product-weight-price.component';
+import { ProductWeightPriceDialogComponent } from './product-weight-price/product-weight-price-dialog.component';
 
 
 const routes: Routes = [
@@ -32,14 +33,16 @@ const routes: Routes = [
   { path: 'product/new', component: ProductDialogComponent},
   { path: 'product/edit/:id', component: ProductDialogComponent},
   //product-quantity-price
-  { path: 'product/:productId/quantity-price', component: ProductQuanityPriceComponent },
-  { path: 'product/:productId/quantity-price/new', component: ProductQuantityPriceDialogComponent},
-  { path: 'product/:productId/quantity-price/edit/:id', component: ProductQuantityPriceDialogComponent},
+  { path: 'product/:productId/weight-price', component: ProductWeightPriceComponent },
+  { path: 'product/:productId/weight-price/new', component: ProductWeightPriceDialogComponent},
+  { path: 'product/:productId/weight-price/edit/:id', component: ProductWeightPriceDialogComponent},
   //shopkeepers
   { path: 'shopkeepers', component: ShopkeeperComponent },
   { path: 'shopkeeper/new', component: ShopkeeperDialogComponent},
   { path: 'shopkeeper/edit/:id', component: ShopkeeperDialogComponent},
 
+  //order (Home page)
+  {path:'orders', component: OrderComponent}
   
 ];
 

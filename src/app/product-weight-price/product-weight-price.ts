@@ -1,4 +1,4 @@
-export class ProductQuantityPrice{
+export class ProductWeightPrice{
     
     constructor(
     public id : number,

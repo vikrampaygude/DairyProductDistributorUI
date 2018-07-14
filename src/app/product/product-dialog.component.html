@@ -11,9 +11,13 @@
             Name is required
           </div>
       </div>
+      <div class="form-group">
+          <label for="name">Short Name</label>
+          <input type="text" [(ngModel)]="model.shortName" name="shortName" #shortName="ngModel" class="form-control" id="name" placeholder="Enter short name">        
+      </div>
       <!-- Brand-->
       <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">Brand Name</label>
           <select [(ngModel)]="model.brandId" name="brandId" #distributorId="ngModel" class="form-control" id="brandId">
               <option *ngFor="let productBrand of productBrands" [ngValue]="productBrand.id">{{productBrand.name}}</option>
           </select>

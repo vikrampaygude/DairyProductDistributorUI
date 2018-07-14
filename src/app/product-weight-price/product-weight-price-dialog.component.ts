@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductQuantityPrice} from './product-quantity-price';
+import {ProductWeightPrice} from './product-weight-price';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ProductQuantityPriceService } from './product-quantity-price.service';
+import { ProductWeightPriceService } from './product-weight-price.service';
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
 
 @Component({
-  selector: 'app-product-quantity-price-dialog',
-  templateUrl: './product-quantity-price-dialog.component.html',
-  styleUrls: ['./product-quantity-price.component.css']
+  selector: 'app-product-weight-price-dialog',
+  templateUrl: './product-weight-price-dialog.component.html',
+  styleUrls: ['./product-weight-price.component.css']
 })
-export class ProductQuantityPriceDialogComponent implements OnInit {
+export class ProductWeightPriceDialogComponent implements OnInit {
 
-  model = new ProductQuantityPrice(0,0,0,0,0,null);
+  model = new ProductWeightPrice(0,0,0,0,0,null);
   product : Product;
 
   onSubmit() { 
     this.model.productId = this.product.id;
-    this.service.save(this.model).subscribe(val => this.router.navigate(['/product/'+this.product.id+'/quantity-price']));
+    this.service.save(this.model).subscribe(val => this.router.navigate(['/product/'+this.product.id+'/weight-price']));
   }
 
-  constructor(public service : ProductQuantityPriceService,
+  constructor(public service : ProductWeightPriceService,
     public router : Router,
     private route: ActivatedRoute,
     public productService: ProductService) { 

@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductBrandDialogComponent implements OnInit {
 
-  model = new ProductBrand(0,null);
+  model = ProductBrand.getEmptyObject();
   
 
   submitted = false;

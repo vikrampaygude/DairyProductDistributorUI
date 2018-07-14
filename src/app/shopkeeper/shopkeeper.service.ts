@@ -24,6 +24,11 @@ export class ShopkeeperService {
     return this.http.get<Shopkeeper>(this.url+"/"+id);
    
   }
+
+  getAllShopkeepersByArea(distributorAreaId : number): Observable<Shopkeeper[]> {
+    return this.http.get<Shopkeeper[]>(this.url+"/list-distributor-area/"+distributorAreaId);
+  }
+
   
   save(product: Shopkeeper) {
     if(product.id && product.id > 0)

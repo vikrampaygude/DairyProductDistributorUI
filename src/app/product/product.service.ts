@@ -26,6 +26,11 @@ export class ProductService {
     return this.http.get<Product>(this.url+"/"+id);
    
   }
+
+  getByDistributorAreaId(distributorAreaId: number): Observable<Product[]>{
+    return this.http.get<Product[]>(this.url+"/distributorArea/"+distributorAreaId);
+   
+  }
   
   save(product: Product) {
     if(product.id && product.id > 0)

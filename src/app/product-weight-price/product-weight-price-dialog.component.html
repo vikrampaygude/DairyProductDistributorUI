@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col col-md-4">
-    <h2>Price by quantity</h2>
+    <h2>Price by weight</h2>
     <h4>{{product.name}} (<small>{{product.brandName}}</small>)</h4>
 
     <form (ngSubmit)="onSubmit()" #productForm="ngForm">
         <div class="form-group">
-            <label for="quantity">Quantity</label><small>( e.g 1 {{product.unitOfMeasure}}, 0.250 {{product.unitOfMeasure}} )</small>
-            <input required type="number" [(ngModel)]="model.quantity" name="quantity" #quantity="ngModel" class="form-control" id="name" placeholder="Enter Quantity ">        
-              <div [hidden]="quantity.valid || quantity.pristine"
+            <label for="weight">weight</label><small>( e.g 1 {{product.unitOfMeasure}}, 0.250 {{product.unitOfMeasure}} )</small>
+            <input required type="number" [(ngModel)]="model.weight" name="weight" #weight="ngModel" class="form-control" id="name" placeholder="Enter weight ">        
+              <div [hidden]="weight.valid || weight.pristine"
               class="alert alert-danger">
-              Quantity is required
+              weight is required
               </div>
         </div>
   
@@ -30,11 +30,8 @@
             Purchase Price is required
             </div>
       </div>
-
-
       <button type="submit" class="btn btn-primary"
       [disabled]="!productForm.form.valid">save</button>
     </form>
   </div>
 </div>
-
