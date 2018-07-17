@@ -14,7 +14,7 @@ export class ProductWeightPriceComponent implements OnInit {
   
   productWeightPrices : ProductWeightPrice[];
 
-  model = new ProductWeightPrice(0,0,0,0,0,null);
+  model = new ProductWeightPrice(0,0,0,0,0,0,null);
 
   product : Product;
 
@@ -28,7 +28,7 @@ export class ProductWeightPriceComponent implements OnInit {
 
   
   newProductWeightPrice(){
-    this.model = new ProductWeightPrice(0,0,0,0,0,null);
+    this.model = new ProductWeightPrice(0,0,0,0,0,0,null);
   }
 
   constructor(public service : ProductWeightPriceService, 

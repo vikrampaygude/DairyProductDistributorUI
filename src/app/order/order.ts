@@ -12,10 +12,11 @@ export class Order {
         public customSellingPrice : number,
         public productWeightPriceId: number,
         public productWeight: number,
-        public byWeightOrders: Order[]
+        public customPriceId: number,
+        public byWeightOrders: Order[],
       ) {  }
   
       public static getEmptyObject(): Order{
-        return new Order(0,0,null,null,null,0,0,0,0,0,0,null);
+        return new Order(0,0,null,null,null,0,0,0,0,0,0,null,null);
       }  
   }

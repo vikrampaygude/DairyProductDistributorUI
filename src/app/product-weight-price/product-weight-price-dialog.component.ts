@@ -12,7 +12,7 @@ import { ProductService } from '../product/product.service';
 })
 export class ProductWeightPriceDialogComponent implements OnInit {
 
-  model = new ProductWeightPrice(0,0,0,0,0,null);
+  model = new ProductWeightPrice(0,0,0,0,0,0,null);
   product : Product;
 
   onSubmit() { 

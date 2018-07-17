@@ -21,6 +21,8 @@ import { OrderComponent } from './order/order.component';
 import { ProductWeightPrice } from './product-weight-price/product-weight-price';
 import { ProductWeightPriceComponent } from './product-weight-price/product-weight-price.component';
 import { ProductWeightPriceDialogComponent } from './product-weight-price/product-weight-price-dialog.component';
+import { CustomPriceComponent } from './custom-price/custom-price.component';
+import { CustomPriceDialogComponent } from './custom-price/custom-price-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,9 @@ import { ProductWeightPriceDialogComponent } from './product-weight-price/produc
     //Shopkeeper
     ShopkeeperComponent,
     ShopkeeperDialogComponent,
+    //custom-price
+    CustomPriceComponent,
+    CustomPriceDialogComponent,
     //order (home)
     OrderComponent
 

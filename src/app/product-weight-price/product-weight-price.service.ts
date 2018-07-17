@@ -44,7 +44,7 @@ export class ProductWeightPriceService {
      * Convert a returned JSON object to Campaign.
      */
     private convertItemFromServer(json: any): ProductWeightPrice {
-      const entity: ProductWeightPrice = Object.assign(new ProductWeightPrice(0,0,0,0,0,null), json);
+      const entity: ProductWeightPrice = Object.assign(new ProductWeightPrice(0,0,0,0,0,0,null), json);
       return entity;
     }
 

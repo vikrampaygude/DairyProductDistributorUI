@@ -13,6 +13,8 @@ import { ShopkeeperDialogComponent } from './shopkeeper/shopkeeper-dialog.compon
 import { OrderComponent } from './order/order.component';
 import { ProductWeightPriceComponent } from './product-weight-price/product-weight-price.component';
 import { ProductWeightPriceDialogComponent } from './product-weight-price/product-weight-price-dialog.component';
+import { CustomPriceComponent } from './custom-price/custom-price.component';
+import { CustomPriceDialogComponent } from './custom-price/custom-price-dialog.component';
 
 
 const routes: Routes = [
@@ -32,7 +34,7 @@ const routes: Routes = [
   { path: 'products', component: ProductComponent },
   { path: 'product/new', component: ProductDialogComponent},
   { path: 'product/edit/:id', component: ProductDialogComponent},
-  //product-quantity-price
+  //product-weight-price
   { path: 'product/:productId/weight-price', component: ProductWeightPriceComponent },
   { path: 'product/:productId/weight-price/new', component: ProductWeightPriceDialogComponent},
   { path: 'product/:productId/weight-price/edit/:id', component: ProductWeightPriceDialogComponent},
@@ -40,6 +42,10 @@ const routes: Routes = [
   { path: 'shopkeepers', component: ShopkeeperComponent },
   { path: 'shopkeeper/new', component: ShopkeeperDialogComponent},
   { path: 'shopkeeper/edit/:id', component: ShopkeeperDialogComponent},
+  //custom-price
+  { path: 'custom-prices', component: CustomPriceComponent },
+  { path: 'custom-price/new', component: CustomPriceDialogComponent},
+  { path: 'custom-price/edit/:id', component: CustomPriceDialogComponent},
 
   //order (Home page)
   {path:'orders', component: OrderComponent}

@@ -27,6 +27,9 @@
 <div class="row col-md-12 align-items-center ">
 
   <div class="pull-right" style="padding:10px 10px 10px 10px;">
+    <button type="button" class="btn btn-primary  pull-right" (click)="applyLatestPrices()">Apply prices</button>
+  </div>
+  <div class="pull-right" style="padding:10px 10px 10px 10px;">
     <button type="button" class="btn btn-primary  pull-right" (click)="onSubmit()">Refresh </button>
   </div>
   <div class="pull-right" style="padding:10px 10px 10px 10px;">
@@ -41,7 +44,7 @@
         <select required [(ngModel)]="newOrder.shopkeeperId" name="shopkeeperId" #shopkeeperId="ngModel" class="form-control mb-2" id="shopkeeperId">
             <option *ngFor="let shopkeeper of shopkeepers" [ngValue]="shopkeeper.id">{{shopkeeper.name}}</option>
         </select>
-    </div>
+     </div>
       <div class="col-md-2">
           <label for="name">Product</label>
           <select required [(ngModel)]="newOrder.productId" (change) = "setProductWeightPrices()" name="productId" #productId="ngModel" class="form-control mb-2" id="productId">
@@ -67,12 +70,45 @@
       </div>
     </div>
 </form>
-  
+
+<form (ngSubmit)="customPriceFormOnSubmit()" #customPriceForm="ngForm" *ngIf="toggleCustomPrice == true" style="margin-bottom: 5px" >
+  <div class="form-row align-items-center row">
+    <div class="col-md-2">
+        <label for="name">Shopkeeper Name</label>
+        <div>
+          {{customPrice.shopkeeperName}}
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label for="name">Product Name</label>
+        <div>
+          {{customPrice.productName}}  
+          <span *ngIf="customPrice.productWeight!=null">( {{customPrice.productWeight}} )</span>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <label for="name">Custom price *</label>
+        <input required type="number" [(ngModel)]="customPrice.price" name="price" class="form-control-sm form-control col-md-2" id="price" placeholder="Enter price">
+    </div>
+    <div class="col-md-2" style="margin-top:25px">
+      <button type="submit" class="btn btn-sm btn-primary">
+        <span *ngIf="customPrice.id !=null">Update</span>
+        <span *ngIf="customPrice.id == null">Add</span>
+      </button>
+      <button type="button" style="margin-left:10px" (click)="toggleCustomPrice=!toggleCustomPrice" class="btn btn-sm btn-primary">
+          Cancel
+        </button>
+    </div>
+  </div>
+</form>
+ 
 <div class="row" *ngIf="searched && orderGridData == null">
   <div class="col-md-8">
       <span>
         Order not present on date {{ordersSearch.date}}. Click 
         <button type="button" class="btn btn-sm btn-primary" (click)="createDailyOrder()">Create daily order</button>
+        <button type="button" class="btn btn-sm btn-primary" (click)="createOrderAsYesterday()">Copy yesterdays order</button>
+        
       </span>
   </div>
 </div>
@@ -82,8 +118,7 @@
           <tr>
             <th>Shopkeepers</th>
             <th *ngFor="let product of orderGridData.dailySellRowDataDTOList[0].orderProductDTOS">
-              {{product.productName}}
-              {{product.productShortName}} ({{product.productBrandShortName}})
+              {{product.productShortName}} {{product.productBrandShortName}}
 
             </th>
             <th>Total Amount</th>
@@ -93,22 +128,26 @@
         </thead>
         <tbody>
           <tr *ngFor="let shopkeeperOrder of orderGridData.dailySellRowDataDTOList">
-              <td>{{shopkeeperOrder.shopkeeperOrderDTO.shopkeeperName}} {{shopkeeperOrder.shopkeeperOrderDTO.id}}</td>
+              <td>{{shopkeeperOrder.shopkeeperOrderDTO.shopkeeperName}} {{shopkeeperOrder.shopkeeperOrderDTO.id}}
+                <button type="button" class="btn btn-sm btn-primary" (click)="copyYesterdayOrder(shopkeeperOrder.shopkeeperOrderDTO.id)">Copy yesterday order</button>
+              </td>
                 <td *ngFor="let order of shopkeeperOrder.orderProductDTOS">
                   
                  
                   <input required type="number" 
                   [(ngModel)]="order.quantity" name="quantity" 
-                  style="width:70px" id="quantity{{order.id}}"
+                    class='home-grid-input' id="quantity{{order.id}}"
                   (change)="onChangeUpdateOrder(order, shopkeeperOrder.shopkeeperOrderDTO)"> 
-                  {{order.unitOfMeasure}}
+                  <span (click)="manageCustomPrice(order, shopkeeperOrder.shopkeeperOrderDTO)"><u> {{order.sellingPrice}} Rs</u></span>
+                  
                   <div *ngIf="order.byWeightOrders !=null" style="padding-top:5px;">
                       <div *ngFor="let orderByWeight of order.byWeightOrders">
-                        <input required type="number" 
+
+                        <input required type="number" class="home-grid-input"
                         [(ngModel)]="orderByWeight.quantity" name="orderByQuantity" 
                         style="width:70px" id="quantity{{orderByWeight.id}}"
                         (change)="onChangeUpdateOrder(orderByWeight, shopkeeperOrder.shopkeeperOrderDTO)">
-                        {{orderByWeight.productWeight}} {{orderByWeight.unitOfMeasure}}  
+                         {{orderByWeight.sellingPrice}} Rs
                       </div>
                   </div>
                 </td>
@@ -128,9 +167,9 @@
                     <label>{{weightTotal.totalItems}} ({{weightTotal.weight}})</label>
                 </div>  
               </td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><label>{{orderGridData.grandTotalAmount}}</label></td>
+              <td><label>{{orderGridData.grandTotalPaidAmount}}</label></td>
+              <td><label>{{orderGridData.grandTotalDueAmount}}</label></td>
             </tr>
         </tbody>
       </table>

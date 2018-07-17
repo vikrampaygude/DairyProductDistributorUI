@@ -48,6 +48,26 @@ export class OrderService {
     return this.http.post(this.url+"/place-day-orders", ordersSearchCopy);
   }
 
+  createOrderAsYesterday(ordersSearch : OrdersSearch){
+    const ordersSearchCopy: OrdersSearch = Object.assign({}, ordersSearch);
+    ordersSearchCopy.date = this.datePipe.transform(ordersSearchCopy.date, 'dd/MM/yyyy');
+    return this.http.post(this.url+"/create-yesterday-copy", ordersSearchCopy);
+  }
+
+  copyYesterdayOrder(orderId : number){
+    return this.http.get(this.url+"/copy-yesterday-order/"+orderId);
+  }
+  
+  ///apply-latest-price
+
+  applyLatestPrices(ordersSearch : OrdersSearch){
+    
+    const ordersSearchCopy: OrdersSearch = Object.assign({}, ordersSearch);
+    ordersSearchCopy.date = this.datePipe.transform(ordersSearchCopy.date, 'dd/MM/yyyy');
+    return this.http.put(this.url+"/apply-latest-price", ordersSearchCopy);
+  }
+
+
   updateWeight(order: Order): Observable<ShopkeeperOrder> {
     return this.http.post<ShopkeeperOrder>(this.url+"/update-weight", order);
   }

@@ -8,6 +8,9 @@ export class OrderGridData{
     date : string;
     dailySellRowDataDTOList : OrderGridRowdata[];
     dailySellGridTotalDTOS : TotalGridCell[];
+    grandTotalAmount : number;
+    grandTotalPaidAmount : number;
+    grandTotalDueAmount : number;
 
     constructor(){
 

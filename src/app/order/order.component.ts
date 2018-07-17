@@ -14,6 +14,8 @@ import { Shopkeeper } from '../shopkeeper/shopkeeper';
 import { Product } from '../product/product';
 import { ProductWeightPrice } from '../product-weight-price/product-weight-price';
 import { ProductWeightPriceService } from '../product-weight-price/product-weight-price.service';
+import { CustomPrice } from '../custom-price/custom-price';
+import { CustomPriceService } from '../custom-price/custom-price.service';
 
 
 @Component({
@@ -37,6 +39,8 @@ export class OrderComponent implements OnInit {
   productWeightPrices : ProductWeightPrice[];
 
   toggleAddByWeight : boolean = false;
+  toggleCustomPrice : boolean = false;
+  customPrice : CustomPrice;
 
 
 
@@ -61,6 +65,43 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  createOrderAsYesterday(){
+    this.service.createOrderAsYesterday(this.ordersSearch).subscribe(obj => {
+      this.onSubmit();
+    });
+  }
+
+  copyYesterdayOrder(orderId){
+    this.service.copyYesterdayOrder(orderId).subscribe(data => console.log(data));
+  }
+
+  customPriceFormOnSubmit(){
+    console.log(this.customPrice);
+    this.customPriceService.save(this.customPrice).subscribe(val => this.onSubmit());
+    this.toggleCustomPrice = !this.toggleCustomPrice;
+  }
+
+  manageCustomPrice(order: Order, shopkeeperOrder: ShopkeeperOrder){
+    
+    this.customPrice = CustomPrice.getEmptyObject();
+    this.customPrice.orderId = order.id;
+    this.customPrice.id = order.customPriceId;
+    this.customPrice.productId = order.productId;
+    this.customPrice.productName = order.productName;
+    this.customPrice.shopkeeperOrderId = shopkeeperOrder.id;
+    this.customPrice.shopkeeperName = shopkeeperOrder.shopkeeperName;
+    this.customPrice.price = order.sellingPrice;
+    
+
+    this.toggleCustomPrice = true;
+  }
+
+  applyLatestPrices(){
+    this.service.applyLatestPrices(this.ordersSearch).subscribe(
+      data => {
+        this.onSubmit();
+      });
+  }
   onChangeUpdateOrder(productOrder: Order, shopkeeperOrder: ShopkeeperOrder){
     this.service.updateWeight(productOrder).subscribe( shopkeeperOrderRes => {
       this.updteShopkeeperOrderLocalData(shopkeeperOrderRes);
@@ -116,7 +157,8 @@ export class OrderComponent implements OnInit {
     , public distributorAreaService : DistributorAreaService
     , public productService: ProductService
     , public shopkeeperService: ShopkeeperService
-    , public productWeightPriceService: ProductWeightPriceService) {
+    , public productWeightPriceService: ProductWeightPriceService
+    , public customPriceService : CustomPriceService) {
 
     this.distributorAreaService.getAllDistributorAreas().subscribe(areas => {
       this.distributorAreas = areas;
