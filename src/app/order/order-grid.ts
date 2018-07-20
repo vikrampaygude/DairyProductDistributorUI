@@ -11,6 +11,7 @@ export class OrderGridData{
     grandTotalAmount : number;
     grandTotalPaidAmount : number;
     grandTotalDueAmount : number;
+    hasFutureOrder : boolean;
 
     constructor(){
 

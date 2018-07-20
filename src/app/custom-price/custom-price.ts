@@ -8,7 +8,7 @@ export class CustomPrice {
   public shopkeeperAreaName: string;
   public productName: string;
   public areaId: number;
-  public orderId: number;
+  public orderProductId: number;
 
     constructor(
       ) {  }

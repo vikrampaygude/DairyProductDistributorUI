@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { DistributorComponent } from './distributor/distributor.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { DistributorDialogComponent } from './distributor/distributor-dialog.component';
 import { DistributorAreaComponent } from './distributor-area/distributor-area.component';
@@ -23,10 +23,17 @@ import { ProductWeightPriceComponent } from './product-weight-price/product-weig
 import { ProductWeightPriceDialogComponent } from './product-weight-price/product-weight-price-dialog.component';
 import { CustomPriceComponent } from './custom-price/custom-price.component';
 import { CustomPriceDialogComponent } from './custom-price/custom-price-dialog.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './auth/customhttpinterceptor';
+import { ErrorInterceptor } from './auth/error.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    //register and login
+    RegisterComponent,
+    LoginComponent,
     //distributor
     DistributorComponent,
     DistributorDialogComponent,
@@ -59,7 +66,10 @@ import { CustomPriceDialogComponent } from './custom-price/custom-price-dialog.c
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS,useClass: AuthInterceptor,multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

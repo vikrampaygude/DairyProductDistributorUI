@@ -42,6 +42,15 @@ export class OrderService {
     
   }
 
+  deleteDayOrder(ordersSearch : OrdersSearch){
+    let dateStr = this.datePipe.transform(ordersSearch.date, 'dd/MM/yyyy');
+
+    let parameters = { params: new HttpParams().set('date', dateStr).set("distributorAreaId", ordersSearch.distributorAreaId+"") };
+    return this.http.delete(this.url+"/day-orders", parameters);
+    
+  }
+
+
   createEmptyDailyOrder(ordersSearch : OrdersSearch){
     const ordersSearchCopy: OrdersSearch = Object.assign({}, ordersSearch);
     ordersSearchCopy.date = this.datePipe.transform(ordersSearchCopy.date, 'dd/MM/yyyy');
@@ -54,8 +63,8 @@ export class OrderService {
     return this.http.post(this.url+"/create-yesterday-copy", ordersSearchCopy);
   }
 
-  copyYesterdayOrder(orderId : number){
-    return this.http.get(this.url+"/copy-yesterday-order/"+orderId);
+  copyYesterdayOrder(orderId : number): Observable<OrderGridData>{
+    return this.http.get<OrderGridData>(this.url+"/copy-yesterday-order/"+orderId);
   }
   
   ///apply-latest-price
@@ -68,12 +77,12 @@ export class OrderService {
   }
 
 
-  updateWeight(order: Order): Observable<ShopkeeperOrder> {
-    return this.http.post<ShopkeeperOrder>(this.url+"/update-weight", order);
+  updateQuantity(order: Order) {
+    return this.http.post(this.url+"/update-quantity", order);
   }
 
-  updatePaidAmount(shopkeeperOrder: ShopkeeperOrder): Observable<ShopkeeperOrder> {
-    return this.http.post<ShopkeeperOrder>(this.url+"/update-paid-amount", shopkeeperOrder);
+  updatePaidAmount(shopkeeperOrder: ShopkeeperOrder): Observable<OrderGridData> {
+    return this.http.post<OrderGridData>(this.url+"/update-paid-amount", shopkeeperOrder);
   }
 
 
@@ -85,8 +94,8 @@ export class OrderService {
     return this.http.post(this.url, copy);
   }
 
-  saveNewOrder(newOrder: NewOrder){
-    return this.http.post(this.url+"/by-weight", newOrder);
+  saveNewOrder(newOrder: NewOrder):Observable<OrderGridData>{
+    return this.http.post<OrderGridData>(this.url+"/by-weight", newOrder);
   }
 
   update(Order: Order) {

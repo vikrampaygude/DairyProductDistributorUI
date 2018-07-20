@@ -3,6 +3,7 @@ import { CustomPrice } from './custom-price';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { OrderGridData } from '../order/order-grid';
 
 
 const httpOptions = {
@@ -27,17 +28,17 @@ export class CustomPriceService {
    
   }
   
-  save(customPrice: CustomPrice) {
+  save(customPrice: CustomPrice) : Observable<OrderGridData> {
     if(customPrice.id && customPrice.id > 0)
     return this.update(customPrice);
 
     const copy = this.convert(customPrice);
-    return this.http.post(this.url, copy);
+    return this.http.post<OrderGridData>(this.url, copy);
   }
 
-  update(customPrice: CustomPrice) {
+  update(customPrice: CustomPrice): Observable<OrderGridData>  {
     const copy = this.convert(customPrice);
-    return this.http.put(this.url, copy);
+    return this.http.put<OrderGridData>(this.url, copy);
   }
 
       /**

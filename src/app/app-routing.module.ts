@@ -15,9 +15,15 @@ import { ProductWeightPriceComponent } from './product-weight-price/product-weig
 import { ProductWeightPriceDialogComponent } from './product-weight-price/product-weight-price-dialog.component';
 import { CustomPriceComponent } from './custom-price/custom-price.component';
 import { CustomPriceDialogComponent } from './custom-price/custom-price-dialog.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
+  //register
+  {path: 'register', component: RegisterComponent},
+  //login
+  {path: 'login', component: LoginComponent},
   //distributor
   { path: 'distributors', component: DistributorComponent },
   { path: 'distributor/new', component: DistributorDialogComponent},

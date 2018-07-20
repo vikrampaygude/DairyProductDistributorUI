@@ -42,8 +42,6 @@ export class OrderComponent implements OnInit {
   toggleCustomPrice : boolean = false;
   customPrice : CustomPrice;
 
-
-
   onSubmit() { 
     this.searched = true;
     console.log("On submit "+this.searched);
@@ -65,6 +63,13 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  deleteDayOrder(){
+    console.log("Daily order click");
+    this.service.deleteDayOrder(this.ordersSearch).subscribe(obj => {
+      console.log(obj);
+      this.onSubmit();
+    });
+  }
   createOrderAsYesterday(){
     this.service.createOrderAsYesterday(this.ordersSearch).subscribe(obj => {
       this.onSubmit();
@@ -72,19 +77,19 @@ export class OrderComponent implements OnInit {
   }
 
   copyYesterdayOrder(orderId){
-    this.service.copyYesterdayOrder(orderId).subscribe(data => console.log(data));
+    this.service.copyYesterdayOrder(orderId).subscribe(data => this.orderGridData = data);
   }
 
   customPriceFormOnSubmit(){
     console.log(this.customPrice);
-    this.customPriceService.save(this.customPrice).subscribe(val => this.onSubmit());
+    this.customPriceService.save(this.customPrice).subscribe(data => this.orderGridData = data);
     this.toggleCustomPrice = !this.toggleCustomPrice;
   }
 
   manageCustomPrice(order: Order, shopkeeperOrder: ShopkeeperOrder){
     
     this.customPrice = CustomPrice.getEmptyObject();
-    this.customPrice.orderId = order.id;
+    this.customPrice.orderProductId  = order.id;
     this.customPrice.id = order.customPriceId;
     this.customPrice.productId = order.productId;
     this.customPrice.productName = order.productName;
@@ -96,17 +101,24 @@ export class OrderComponent implements OnInit {
     this.toggleCustomPrice = true;
   }
 
+  changeDate(i : number){
+    let date = new Date(this.ordersSearch.date);
+    date.setDate(date.getDate() + i);
+    this.ordersSearch.date = this.datePipe.transform(date, 'yyyy-MM-dd');
+    this.onSubmit();
+  }
+
   applyLatestPrices(){
     this.service.applyLatestPrices(this.ordersSearch).subscribe(
       data => {
         this.onSubmit();
       });
   }
-  onChangeUpdateOrder(productOrder: Order, shopkeeperOrder: ShopkeeperOrder){
-    this.service.updateWeight(productOrder).subscribe( shopkeeperOrderRes => {
-      this.updteShopkeeperOrderLocalData(shopkeeperOrderRes);
-    });
 
+  onChangeUpdateOrder(productOrder: Order, shopkeeperOrder: ShopkeeperOrder){
+    this.service.updateQuantity(productOrder).subscribe( response => {
+      //this.orderGridData = gridData;      
+    });
   }
 
   setShopkeepers() {
@@ -121,21 +133,11 @@ export class OrderComponent implements OnInit {
     this.productWeightPriceService.getProductWeightPrices(this.newOrder.productId).subscribe(data => this.productWeightPrices = data);
   }
 
-  updteShopkeeperOrderLocalData(shopkeeperOrderRes : ShopkeeperOrder){
-      // sets value to reflect in ui
-      this.orderGridData.dailySellRowDataDTOList.forEach(rowOrder => {
-        if(rowOrder.shopkeeperOrderDTO.id == shopkeeperOrderRes.id){
-          rowOrder.shopkeeperOrderDTO = shopkeeperOrderRes;
-          return;
-        }
-    });
-
-  }
-
   updatePaidOrder(shopkeeperOrderDTO : ShopkeeperOrder){
       //orderSer
-      this.service.updatePaidAmount(shopkeeperOrderDTO).subscribe(shopkeeperOrderRes =>{
-        this.updteShopkeeperOrderLocalData(shopkeeperOrderRes);
+      this.service.updatePaidAmount(shopkeeperOrderDTO).subscribe(gridData =>{
+        this.orderGridData = gridData;
+        console.log(this.orderGridData);
       });
   }
 
@@ -148,7 +150,9 @@ export class OrderComponent implements OnInit {
       }
     });
     this.toggleAddByWeight = !this.toggleAddByWeight;
-    this.service.saveNewOrder(this.newOrder).subscribe(data => this.onSubmit());
+    this.service.saveNewOrder(this.newOrder).subscribe(gridData =>{
+      this.orderGridData = gridData;
+    });
   }
   // TODO: Remove this when we're done
 //  get diagnostic() { return JSON.stringify(this.model); }
